@@ -31,6 +31,23 @@ let pause = true;
 
 const canvas = document.querySelector('.tetris');
 const context = canvas.getContext('2d');
+const playfield = [];
+for (let row = -2; row < 17; row++) {
+    playfield[row] = [];
+    for (let col = 0; col < 10; col++) {
+        playfield[row][col] = 0;
+    }
+}
+
+
+for (let row = 0; row < 17; row++) {
+  for (let col = 0; col < 10; col++) {
+      if (playfield[row][col]) {
+          context.strokeStyle = '#0f002e';
+          context.strokeRect(col * grid, row * grid, grid, grid);
+      }
+  }
+}
 
 const nextCanvas = document.querySelector('.next');
 const nextContext = nextCanvas.getContext('2d');
@@ -442,5 +459,15 @@ $('#highScore').on('submit', (e) => {
     }
   });
 });    
+context.strokeStyle = '#fff'; // Defina a cor das linhas do grid
+
+for (let row = 0; row < 17; row++) {
+  for (let col = 0; col < 10; col++) {
+    // Desenhe retângulos vazios para criar as linhas do grid
+    context.strokeRect(col * grid, row * grid, grid, grid);
+  }
+}
+
+
 
 update();

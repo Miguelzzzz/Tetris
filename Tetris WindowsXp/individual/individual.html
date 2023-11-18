@@ -3,10 +3,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tetris</title>
+  <title>Tetris Windows XP!</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link rel="shortcut icon" href="../img/logotitle.png" type="image/x-icon">
 
 </head>
 <body class="fundo">
@@ -58,6 +59,11 @@
 
   }
 
+  .voltarBtn {
+
+    margin-bottom: 20px;
+  }
+
   .modal-content input {
       color: white;
       font-size: 24px !important;
@@ -70,11 +76,11 @@
   }
 
   .btn:focus {
-      background-color: #00bfa5 !important;
+      background-color: #2f9600b6 !important;
   }
 
   .btn {
-      background-color: #009688 !important;
+      background-color: #2f9600b6 !important;
   }
 
   .yourScore {
@@ -141,11 +147,6 @@
     text-decoration: none;
   }
 
-  #erro-sound{
-    visibility: hidden;
-    position: absolute;
-  }
-
   @media (max-width: 920px), (max-height: 800px){
       body, html {
       font-size: 16px;
@@ -159,7 +160,7 @@
       }
 
       .modal-content{
-        margin-top: 35%
+        margin-top: 30%
       }
       
       .modal-content .btn {
@@ -237,29 +238,31 @@
     <div id="newGame" class="modal">
         <div class="modal-content">
           <h4>Tetris</h4>
-          <button onclick="newGame()" id="newGameBtn" class="modal-close waves-effect waves-light btn" style="width:250px">New Game</button>
+          <button onclick="newGame()" id="newGameBtn" class="modal-close waves-effect waves-light btn" style="width:250px">Novo jogo</button>
           </div>
         </div>
 
     <div id="pause" class="modal">
         <div class="modal-content">
-          <h4>Game Paused</h4>
-          <button onclick="pauseGame()" id="pauseBtn" class="modal-close waves-effect waves-light btn">Resume Game</button><br>
-          <button onclick="newGame()" id="StartNewBtn" class="modal-close waves-effect waves-light btn">Start New Game</button>
+          <h4>Jogo Pausado!</h4>
+          <div class="voltarBtn btn"><a href="../index.html">Início</a></div>
+          <button onclick="pauseGame()" id="pauseBtn" class="modal-close waves-effect waves-light btn">Continuar!</button><br>
+          <button onclick="newGame()" id="StartNewBtn" class="modal-close waves-effect waves-light btn">Começar um novo jogo!</button>
           </div>
         </div>
 
     <div id="gameOver" class="modal">
         <div class="modal-content">
-          <h4>Game Over</h4>
+          <h4>Jogo Terminado!</h4>
               <div class="yourScore"></div>
               <form id="highScore">
               </form>
-              <a onclick="newGame()" class="modal-close waves-effect waves-light btn">Start New Game</a>
+              <a onclick="newGame()" class="modal-close waves-effect waves-light btn">Comece um novo jogo!</a>
           </div>
         </div>
 
     <div class="detailsLeft">
+      
       <div class="score"></div>
       <div class="level"></div>
       <div class="highScores"></div>
@@ -273,7 +276,7 @@
         
       </div>  
   </div>
-  <audio src="../individual/audios/erro.mp3" controls id="erro-sound"></audio>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
