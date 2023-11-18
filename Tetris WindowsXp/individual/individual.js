@@ -14,7 +14,7 @@ $(document).ready(function(){
             url: 'https://api.mlab.com/api/1/databases/tetrishighscores/collections/scores?s={"score":-1}&apiKey=E8dx03lqLdc5pG_K002t_lJrPOwDi1vG',
             type: "GET",
             success: (data) => {
-        let scoreLog = `<p class="score-title"><u>High Scores:</u></p>`;
+        let scoreLog = `<p class="score-title"><u>Pontos:</u></p>`;
         highScoreMin = data[10].score;
                 for(var i = 0; i <= 10; i++){
                     scoreLog += `<p>${data[i].name.slice(0, 7)}: ${data[i].score}</p>`;
@@ -301,8 +301,8 @@ function update(time = 0){
 }
 
 function updateScore(){
-  document.querySelector('.score').innerHTML = `<p><b><u>Score:</u> ${player.score}</b></p>`;
-  document.querySelector('.level').innerHTML = `<p><b><u>Level:</u> ${player.level}</b></p>`;
+  document.querySelector('.score').innerHTML = `<p><b><u>Score:</u>${player.score}</b></p>`;
+  document.querySelector('.level').innerHTML = `<p><b><u>Level:</u>${player.level}</b></p>`;
 }
 
 const colors = [
