@@ -62,10 +62,10 @@ const player = {
 let dropCounter = 0;
 let DROP_FAST = 50;
 
-function arenaSweep(){
+function arenaSweep() {
   let rowCount = 1;
-  outer: for(y=arena.length - 1; y > 0; y--){
-    for(x=0; x < arena[y].length; x++){
+  outer: for(y = arena.length - 1; y > 0; y--) {
+    for(x = 0; x < arena[y].length; x++) {
       if(arena[y][x] === 0) {
         continue outer;
       }
@@ -77,14 +77,32 @@ function arenaSweep(){
     player.score += rowCount * 100;
     rowCount *= 2;
     let scoreStr = player.score.toString();
-    if(scoreStr.length > 3){
-      let num = Number(scoreStr.slice(0, scoreStr.length - 3));
+    
+    // Ajuste da velocidade com base no nível
+    if (player.score > 1000) {
+      let num = Math.floor(player.score / 1000);
       player.level = num + 1;
       player.dropInterval = 1000 - (num * 50);
       player.DROP_SLOW = 1000 - (num * 50);
     }
   }
 }
+
+
+function playerDrop() {
+  player.pos.y++;
+  if(collide(arena, player)) {
+    player.pos.y--;
+    merge(arena, player);
+    playerReset();
+    arenaSweep();
+    updateScore();
+  }
+  dropCounter = 0;
+}
+
+// ... (o restante do código permanece inalterado)
+
 
 function collide(arena, player){
   const [m, o] = [player.matrix, player.pos];
@@ -300,20 +318,42 @@ const colors = [
   '#2bff00'//Z PEÇA EM N ESQUERDA
 ];
 
-function keyListener(e){
-  if(e.type === 'keydown'){
-    if(e.keyCode === 37){
-      playerMove(-1)
-    } else if(e.keyCode === 39){
+function keyListener(e) {
+  if (e.type === 'keydown') {
+    if (e.keyCode === 37) {
+      playerMove(-1);
+    } else if (e.keyCode === 39) {
       playerMove(1);
-    } else if(e.keyCode === 81){
+    } else if (e.keyCode === 81) {
       playerRotate(-1);
-    } else if(e.keyCode === 87 || e.keyCode === 38){
+    } else if (e.keyCode === 87 || e.keyCode === 38) {
       playerRotate(1);
-    } else if(e.keyCode === 27){
+    } else if (e.keyCode === 27) {
       pauseGame();
+    } else if (e.keyCode === 32) {
+      while (!collide(arena, player)) {
+        player.pos.y++;
+      }
+      player.pos.y--;
+      merge(arena, player);
+      playerReset();
+      arenaSweep();
+      updateScore();
     }
   }
+
+  if (e.keyCode === 40) {
+    if (e.type === 'keydown') {
+      if (player.dropInterval !== DROP_FAST) {
+        playerDrop();
+        player.dropInterval = DROP_FAST;
+      }
+    } else {
+      player.dropInterval = player.DROP_SLOW;
+    }
+  }
+}
+
 
   if (e.keyCode === 40) {
     if (e.type === 'keydown') {
@@ -325,7 +365,7 @@ function keyListener(e){
         player.dropInterval = player.DROP_SLOW;
     }
   }
-};
+
 
 function pauseGame(){
   if(pause === true){   
