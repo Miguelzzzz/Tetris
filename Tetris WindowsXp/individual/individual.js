@@ -34,12 +34,20 @@ const context = canvas.getContext('2d');
 
 const nextCanvas = document.querySelector('.next');
 const nextContext = nextCanvas.getContext('2d');
+const Error = document.querySelector('#erro-sound');
 
 context.scale(20, 20);
 nextContext.scale(30, 30);
 
 const arena = createMatrix(12, 20);
 const nextArena = createMatrix(6, 6);
+
+
+function erro() {
+  Error.currentTime = 0;
+  Error.play();
+  console.log('Tentando reproduzir som do Erro');
+}
 
 const player = {
   pos: {x: 0, y: 0},
@@ -330,13 +338,16 @@ function pauseGame(){
       if(player.score > 0){
       $('#gameOver').modal({
                 'dismissible': false,
-                "onOpenEnd": function(){ $('#name').focus(); } 
+                "onOpenEnd": function(){ $('#name').focus();
+                 } 
       });
       $('#gameOver').modal('open');
       $('.yourScore').html(`<p>Your Score: ${player.score}`)
+      erro();
     } else {
       $('#newGame').modal({'dismissible': false});
       $('#newGame').modal('open'); 
+      erro();
     }
     } else {
       pause = true;
