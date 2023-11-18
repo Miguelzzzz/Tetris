@@ -42,7 +42,6 @@ nextContext.scale(30, 30);
 const arena = createMatrix(12, 20);
 const nextArena = createMatrix(6, 6);
 
-
 function erro() {
   Error.currentTime = 0;
   Error.play();
@@ -102,7 +101,6 @@ function playerDrop() {
 }
 
 // ... (o restante do código permanece inalterado)
-
 
 function collide(arena, player){
   const [m, o] = [player.matrix, player.pos];

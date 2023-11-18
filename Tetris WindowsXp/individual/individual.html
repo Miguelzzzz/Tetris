@@ -43,6 +43,20 @@
     background-size: cover;
 }
 
+.tetris {
+  height: 90vh;
+  border: solid 2px #fff; /* Adiciona uma borda branca */
+  box-sizing: border-box; /* Garante que a borda não aumente as dimensões reais da tela */
+  }
+  
+  .tetris div {
+    width: calc(100% / 10); /* Divide a largura do contêiner em 10 colunas */
+    height: calc(100% / 20); /* Divide a altura do contêiner em 20 linhas */
+    box-sizing: border-box;
+    float: left; /* Permite que as células fiquem ao lado umas das outras */
+    border: solid 1px #fff; /* Adiciona uma borda branca entre as células */
+  }
+
 .modal-content {
     display: flex;
     flex-direction: column;
@@ -87,22 +101,26 @@
       background-color: #2f9600b6 !important;
   }
 
-  .score {
-    margin-right: 10px;
-  }
+  
 
   .yourScore {
     padding-bottom: 0px; 
   }
 
   .detailsLeft {
+    font-weight: 800;
     width: 130px;
     position: relative;
     height: 90vh;
     margin: 0% 2%;
-    text-align: right;
     font-size: 16px;
    }
+
+  .score {
+    margin-right: 10px;
+    font-weight: 800;
+
+  }
 
   .highScores {
     position: absolute;
@@ -172,8 +190,9 @@
           min-width: 100vw;
       }
 
+      /* mudar para 30% se nao for usar tela cheia */
       .modal-content{
-        margin-top: 30%
+        margin-top: 33%
       }
       
       .modal-content .btn {
@@ -190,7 +209,7 @@
       .modal-content label {
           font-size: 14px !important;
       }
-    
+
       .wrapper {
           display: inline-flex;
           justify-content: center;
@@ -198,23 +217,28 @@
           margin: 0px !important;
           height: 100%;
           width: 100%;
-          opacity: 95%;
-      }
+        }
       
       .detailsLeft {
         height: 80vh;
         width: 110px;
         margin: 5% 1% 0% 0%;
+        margin-right: 30px;
         font-size: 18px;
         }
     
     .score-title {
       font-size: 14px;
+      font-weight: 800;
+
     }
     
       .highScores {
+      
         line-height: 8px;
         font-size: 12px;
+        font-weight: 800;
+
     }
       
       .detailsRight {
@@ -291,6 +315,15 @@
   </div>
 
   <audio src="../individual/audios/erro.mp3" controls id="erro-sound"></audio>
+  <audio src="../individual/audios/music.mp3" controls id="music-sound" autoplay></audio>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var music = document.getElementById('music-sound');
+      music.volume = 0.2; // Ajuste o valor conforme desejado (entre 0 e 1)
+    });
+  </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
